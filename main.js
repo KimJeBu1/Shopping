@@ -1,4 +1,4 @@
-'static'
+// 'static'
 const items = document.querySelector('.items');
 const input = document.querySelector('.footer__input');
 const addBtn = document.querySelector('.footer__button');
@@ -6,7 +6,7 @@ const addBtn = document.querySelector('.footer__button');
 function onAdd() {
     //1. 사용자가 입력한 텍스트를 받아옴
     const text = input.value;
-    // console.log(text);
+    console.log(text);
     if(text === '') {
         input.focus();
         return;
@@ -15,7 +15,9 @@ function onAdd() {
     const item = createItem();
     //3. items 컨테이너안에 새로 만든 아이템을 추가한다
     items.appendChild(item);
-    //4. 인풋을 초기화 한다
+    // 4. 새로 추가된 아이템으로 스크롤링
+    item.scrollIntoView({block: 'center'});
+    //5. 인풋을 초기화 한다
     input.value = '';
     input.focus();//입력란에 한번 입력 후 마우스를 갔다대지 않아도 바로바로 쓸수 있음
 } 
@@ -38,7 +40,7 @@ function createItem(text) {
     deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
     deleteBtn.addEventListener('click', () => {
         items.removeChild(itemRow);
-    })
+    });
 
     const itemDivider = document.createElement('div');
     itemDivider.setAttribute('class', 'item__divider');
@@ -54,6 +56,9 @@ addBtn.addEventListener('click', () => {
     onAdd();
 });
 
-input.addEventListener('keypresss', (event) => {
+input.addEventListener('keypress', event => {
+    if(event.key ==='Enter') {
+        onAdd();
+    } 
     
-})
+});
