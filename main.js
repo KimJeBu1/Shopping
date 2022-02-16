@@ -1,8 +1,13 @@
 'use strict'
 const items = document.querySelector('.items');
+const form = document.querySelector('.new-form');
 const input = document.querySelector('.footer__input');
 const addBtn = document.querySelector('.footer__button');
 
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onAdd();
+})
 function onAdd() {
     //1. 사용자가 입력한 텍스트를 받아옴
     const text = input.value;
@@ -62,19 +67,21 @@ function createItem(text) {
     // itemRow.appendChild(itemDivider);
     return itemRow;
 }
-addBtn.addEventListener('click', () => {
-    onAdd();
-});
 
-input.addEventListener('keydown', event => {
-    if (event.isComposing) { //한국어처럼 한글자를 만들면 중간중간 event 발생 할수 있어서 타이핑 완성된후 하라는 코드
-        return; //or 'keyup' 사용하면 됨
+//html에 form tag 생성하면 없어도 됨
+// addBtn.addEventListener('click', () => {
+//     onAdd();
+// });
+
+// input.addEventListener('keydown', event => {
+//     if (event.isComposing) { //한국어처럼 한글자를 만들면 중간중간 event 발생 할수 있어서 타이핑 완성된후 하라는 코드
+//         return; //or 'keyup' 사용하면 됨
     
-    }
-    if(event.key ==='Enter') {
-        onAdd();
-    }  
-});
+//     }
+//     if(event.key ==='Enter') {
+//         onAdd();
+//     }  
+// });
 
 items.addEventListener('click', event => {
     const id = event.target.dataset.id;
